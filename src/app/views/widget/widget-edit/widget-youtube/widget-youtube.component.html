@@ -1,0 +1,56 @@
+<div *ngIf="errorFlag"
+     class="alert alert-danger">
+  {{errorMsg}}
+</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left" (click)="back()">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-ok" (click)="updateWidget()">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+      Widgets Edit
+    </a>
+  </div>
+</nav>
+
+<div class="container" *ngIf="curWidget">
+  <div class="form-group">
+    <label for="youtube-name">Name</label>
+    <input [(ngModel)]="curWidget.name" type="text" class="form-control" id="youtube-name" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="youtube-text">Text</label>
+    <input [(ngModel)]="curWidget.text" type="text" class="form-control" id="youtube-text" placeholder={{curWidget.text}}>
+  </div>
+  <div class="form-group">
+    <label for="youtube-URL">URL</label>
+    <input [(ngModel)]="curWidget.url" type="text" class="form-control" id="youtube-URL" placeholder={{curWidget.url}}>
+  </div>
+  <div class="form-group">
+    <label for="youtube-width">Width</label>
+    <input [(ngModel)]="curWidget.width" type="text" class="form-control" id="youtube-width" placeholder={{curWidget.width}}>
+  </div>
+  <button class="btn btn-danger btn-block" (click)="deleteWidget()">Delete</button>
+</div>
+
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid rows">
+    <div class="pull-right navbar-text">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>-->

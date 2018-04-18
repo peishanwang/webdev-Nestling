@@ -1,0 +1,70 @@
+<div *ngIf="errorFlag"
+     class="alert alert-danger">
+  {{errorMsg}}
+</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left" (click)="back()">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-ok" (click)="updateWidget()">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold">
+      Widgets Edit
+    </a>
+  </div>
+</nav>
+
+<!--Body of the page -->
+<div class="container" *ngIf="curWidget">
+  <div *ngIf=flag
+       class="alert alert-danger">
+    {{error}}
+  </div>
+  <label for="Name">Name</label>
+  <div>
+    <input [(ngModel)]="curWidget.name"
+           type="text"
+           class="form-control"
+           id="Name"
+           name="name"
+           placeholder="Name">
+    <span class="alert-class"
+          *ngIf=flag>{{alert}}</span>
+  </div>
+  <div class="form-group">
+    <label for="text">Text</label>
+    <input [(ngModel)]="curWidget.text" type="text" class="form-control" id="text" placeholder="Text">
+  </div>
+  <div class="form-group">
+    <label for="rows">Rows</label>
+    <input [(ngModel)]="curWidget.rows" type="text" class="form-control" id="rows">
+  </div>
+  <div class="form-group">
+    <label for="placeholder">Placeholder</label>
+    <input [(ngModel)]="curWidget.placeholder" id="placeholder" class="form-control" required>
+  </div>
+  <p></p>
+  <div class="input-group">
+    <input type="text"
+           readonly
+           value="Formatted"
+           class="form-control"/>
+    <span class="input-group-addon">
+        <input [(ngModel)]="curWidget.formatted"
+               type="checkbox"/>
+    </span>
+  </div>
+  <p></p>
+  <a class="btn btn-danger btn-block "
+     (click)="deleteWidget()">Delete</a>
+</div>
+
