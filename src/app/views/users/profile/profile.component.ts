@@ -9,41 +9,74 @@ import {SharedService} from "../../../services/shared.service";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: {};
-  userId: String;
+  user: any;
+  username: String;
+  errorFlag: boolean;
+  errorMsg: String;
+  updateFlag: boolean;
+  updateMsg: String;
+  alert: String;
+
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
-    private sharedService: SharedService
-    ) {
-  }
+    private sharedService: SharedService) { }
 
   updateUser() {
-    //console.log(user);
-    this.route.params.subscribe(params => {
-      this.userService.updateUser(this.user).subscribe();
-    });
-  }
+    this.updateFlag = false;
+    this.errorFlag = false;
+    if (this.username !== this.user.username) {
+      if (this.username === '') {
+        this.errorFlag = true;
+        this.errorMsg = 'Please enter username!';
+        return;
+      }
+      this.userService.findUserByUsername(this.username).subscribe(
+        (user: any) => {
+          if (user) {
+            this.errorFlag = true;
+            this.errorMsg = 'The username is in use. Please enter a different name.';
+          } else {
+            this.user.username = this.username;
+            this.update();
+          }
+        },
+        (error: any) => console.log(error)
+      );
+    } else {
+      this.update();
+    }
 
-  deleteUser() {
-    this.userService.deleteUser(this.userId).subscribe((status) => {
-      this.router.navigate(['/login']);
-    });
   }
-
+  update() {
+    this.userService.updateUser(this.user).subscribe(
+      (response: any) => {
+        this.updateFlag = true;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
   logout() {
     this.userService.logout()
       .subscribe(
-        (data: any) => this.router.navigate(['/login'])
+        (data: any) => {
+          this.sharedService.user = '';
+          this.router.navigate(['/']);
+        }
       );
   }
-
   ngOnInit() {
-    //console.log(this.sharedService.user);
-    this.user = this.sharedService.user;
-    this.userId = this.user['_id'];
-    //console.log(this.userId);
+    this.getUser();
+    this.updateFlag = false;
+    this.errorFlag = false;
+    this.updateMsg = 'Profile updated!';
+    this.alert = '* Please enter username';
   }
-
+  getUser() {
+    this.user = this.sharedService.user;
+    this.username = this.user.username;
+  }
 }

@@ -15,8 +15,12 @@
       </ul>
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
-      <div class="navbar-header navbar-toggler-right">
-        <a (click)="logout()">Log Out</a>
+      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name = "login">
+        <a [routerLink]="['/login']">Login</a>
+        <a [routerLink]="['/register']">Register</a>
+      </div>
+      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+        <a [routerLink]="['/profile']">Profile</a>
       </div>
     </form>
   </div>

@@ -3,6 +3,7 @@ import {Website} from '../../../models/website.model.client';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from "../../../services/shared.service";
+import {UserService} from "../../../services/user.service.client";
 
 @Component({
   selector: 'app-website-list',
@@ -17,7 +18,8 @@ export class WebsiteListComponent implements OnInit {
     private router: Router,
     private websiteService: WebsiteService,
     private activateRoute: ActivatedRoute,
-    private sharedService: SharedService) { }
+    private sharedService: SharedService,
+    private userService: UserService) { }
 
   deleteWebsite(websiteId) {
     this.websiteService.deleteWebsite(websiteId).subscribe(
@@ -35,6 +37,15 @@ export class WebsiteListComponent implements OnInit {
         }
       );
     });
+  }
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+          this.router.navigate(['/']);
+        }
+      );
   }
 
 }

@@ -12,6 +12,7 @@ import {WebsiteService} from "../../../services/website.service.client";
 export class WebsiteAllComponent implements OnInit {
   noUser: boolean;
   websites: [any];
+  searchText: String;
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private sharedService: SharedService,

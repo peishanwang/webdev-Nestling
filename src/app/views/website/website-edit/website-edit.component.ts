@@ -4,6 +4,7 @@ import {Website} from '../../../models/website.model.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from "../../../services/shared.service";
 import {WebsiteNewComponent} from "../website-new/website-new.component";
+import {UserService} from "../../../services/user.service.client";
 
 @Component({
   selector: 'app-website-edit',
@@ -19,6 +20,7 @@ export class WebsiteEditComponent implements OnInit {
   errorMsg = 'Please enter valid website name!';
 
   constructor(
+    private userService: UserService,
     private websiteService: WebsiteService,
     private activateRoute: ActivatedRoute,
     private router: Router,
@@ -34,7 +36,15 @@ export class WebsiteEditComponent implements OnInit {
     }
   }
 
-
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+          this.router.navigate(['/']);
+        }
+      );
+  }
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
