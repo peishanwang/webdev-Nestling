@@ -2,7 +2,7 @@ module.exports = function (app) {
   var multer = require('multer'); // npm install multer --save
   var upload = multer({ dest: __dirname+'/../../src/assets/uploads' });
 
-  app.post('/api/page/:pageId/widget', createWidget)
+  app.post('/api/page/:pageId/widget', createWidget);
   app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
   app.get('/api/widget/:widgetId', findWidgetById);
   app.put('/api/widget/:widgetId', updateWidget);
@@ -12,12 +12,24 @@ module.exports = function (app) {
   var widgetModel = require("../model/widget/widget.model.server");
 
   function uploadImage(req, res) {
-    var widgetId      = req.body.widgetId;
-    var width         = req.body.width;
-    var myFile        = req.file;
+
     var userId = req.body.userId;
     var websiteId = req.body.websiteId;
     var pageId = req.body.pageId;
+
+
+    var widgetId      = req.body.widgetId;
+    var width         = req.body.width;
+    var myFile        = req.file;
+
+    if(myFile == null) {
+      res.redirect("/user/website/"
+        + websiteId + '/page/' + pageId + '/widget/' + widgetId);
+      //res.redirect("http://localhost:4200/user/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+      return;
+    }
+
+
     var originalname  = myFile.originalname; // file name on user's computer
     var filename      = myFile.filename;     // new file name in upload folder
     var path          = myFile.path;         // full path of uploaded file
@@ -25,22 +37,44 @@ module.exports = function (app) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    widget = getWidgetForWidId(widgetId);
-    widget.url = 'uploads/'+filename;
 
+    var widget = { url: "/assets/uploads/"+filename};
+    console.log(widgetId);
+    console.log(widget);
     widgetModel
       .updateWidget(widgetId, widget)
-      .then(function (status) {
-          res.send(status);
+      .then(function (stats) {
+          console.log(stats);
+          res.json(stats);
         },
         function (err) {
           res.sendStatus(500).send(err);
         });
 
-    var callbackUrl   = "/user/website/"
-      + websiteId + '/page/' + pageId + '/widget/' + widgetId;
+    res.redirect("/user/website/"
+      + websiteId + '/page/' + pageId + '/widget/' + widgetId);
 
-    res.redirect(callbackUrl);
+    /* var widgetId      = req.body.widgetId;
+     var myFile        = req.file;
+     var websiteId = req.body.websiteId;
+     var pageId = req.body.pageId;
+     var filename      = myFile.filename;     // new file name in upload folder
+
+     var widget = { url: "assets/uploads/"+filename};
+
+     widgetModel
+       .updateWidget(widgetId, widget)
+       .then(function (status) {
+
+           res.send(status);
+         },
+         function (err) {
+           res.sendStatus(500).send(err);
+         });
+
+     var callbackUrl   = "/user/website/"
+       + websiteId + '/page/' + pageId + '/widget/' + widgetId;
+     res.redirect(callbackUrl);*/
   }
 
   function reorderWidgets(req,res) {

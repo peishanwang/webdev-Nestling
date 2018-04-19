@@ -4,19 +4,26 @@ module.exports = function(app){
   app.get("/api/website/:websiteId", findWebsiteById);
   app.put("/api/website/:websiteId", updateWebsite);
   app.delete("/api/website/:websiteId", deleteWebsite);
+  app.get("/api/allwebsite", findAllWebsites);
   var websiteModel = require('../model/website/website.model.server');
-
+  var userModel = require("../model/user/user.model.server");
   function createWebsite(req,res) {
     var userId = req.params.userId;
     var website = req.body;
-    websiteModel
-      .createWebsiteForUser(userId, website)
-      .then (function (website) {
-          res.json(website);
-        },
-        function (err) {
-          res.sendStatus(500).send(err);
-        });
+    userModel.findUserById(userId)
+      .then(function (user) {
+        website.username = user.username;
+        websiteModel
+          .createWebsiteForUser(userId, website)
+          .then (function (website) {
+              res.json(website);
+              console.log(website);
+            },
+            function (err) {
+              res.sendStatus(500).send(err);
+            });
+      })
+
   }
 
 
@@ -63,6 +70,17 @@ module.exports = function(app){
       .deleteWebsite(websiteId)
       .then (function (status) {
           res.send(status);
+        },
+        function (err) {
+          res.sendStatus(500).send(err);
+        });
+  }
+
+  function findAllWebsites(req,res) {
+    websiteModel
+      .findAllWebsites()
+      .then(function (websites) {
+          res.json(websites);
         },
         function (err) {
           res.sendStatus(500).send(err);

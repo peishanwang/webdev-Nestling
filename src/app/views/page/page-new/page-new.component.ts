@@ -11,10 +11,9 @@ import {WebsiteNewComponent} from "../../website/website-new/website-new.compone
 })
 export class PageNewComponent implements OnInit {
   websiteId: String;
-  pageName: String;
   pageTitle: String;
   errorFlag: boolean;
-  errorMsg = 'Please enter valid website name!';
+  errorMsg = 'Please enter valid page title!';
 
   constructor(
     private pageService: PageService,
@@ -22,13 +21,13 @@ export class PageNewComponent implements OnInit {
     private router: Router) { }
 
   createPage() {
-    if (WebsiteNewComponent.isEmpty(this.pageName)) {
+    if (WebsiteNewComponent.isEmpty(this.pageTitle)) {
       this.errorFlag = true;
     } else {
-      const newPage = new Page(this.pageName, this.websiteId, this.pageTitle);
+      const newPage = new Page('name', this.websiteId, this.pageTitle);
       this.pageService.createPage(this.websiteId, newPage).subscribe(
         (data: any) => this.router
-          .navigate(['/user', '/website', this.websiteId, 'page'])
+          .navigate(['/user/website', this.websiteId, 'page'])
       );
     }
   }

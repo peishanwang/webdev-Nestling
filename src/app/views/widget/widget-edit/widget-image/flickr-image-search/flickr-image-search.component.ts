@@ -34,9 +34,9 @@ export class FlickrImageSearchComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
-          this.websiteId = params['websiteId'];
-          this.pageId = params['pageId'];
-          this.widgetId = params['widgetId'];
+          this.websiteId = params['wid'];
+          this.pageId = params['pid'];
+          this.widgetId = params['wgid'];
         }
       );
   }

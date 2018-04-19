@@ -39,30 +39,6 @@ export class WidgetImageComponent implements OnInit {
     }
   }
 
-  back() {
-    if (this.isNew) {
-      this.deleteWidget();
-    } else {
-      this.router
-        .navigate(['/user/website', this.websiteId, 'page', this.pageId, 'widget'])
-    }
-  }
-
-  deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId)
-      .subscribe(
-        (data: any) => {
-          if (!this.isNew) {
-            this.router
-              .navigate(['/user/website', this.websiteId, 'page', this.pageId, 'widget'])
-          } else {
-            this.router
-              .navigate(['/user/website', this.websiteId, 'page', this.pageId, 'widget', 'new'])
-          }},
-        (error: any) => console.log(error)
-      );
-  }
-
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {
       this.baseUrl = environment.baseUrl;

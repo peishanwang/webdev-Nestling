@@ -4,11 +4,13 @@ var WebsiteModel = mongoose.model('WebsiteModel', WebsiteSchema);
 
 var websiteModel = require("../website/website.model.server");
 
+
 WebsiteModel.createWebsiteForUser = createWebsiteForUser;
 WebsiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
 WebsiteModel.findWebsiteById = findWebsiteById;
 WebsiteModel.updateWebsite = updateWebsite;
 WebsiteModel.deleteWebsite = deleteWebsite;
+WebsiteModel.findAllWebsites = findAllWebsites;
 
 module.exports = WebsiteModel;
 
@@ -37,6 +39,10 @@ function updateWebsite(websiteId, website){
 
 function deleteWebsite(websiteId) {
   return WebsiteModel.remove({_id: websiteId});
+}
+
+function findAllWebsites() {
+  return WebsiteModel.find();
 }
 
 

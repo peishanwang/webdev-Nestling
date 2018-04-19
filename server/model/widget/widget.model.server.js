@@ -36,11 +36,10 @@ function findWidgetById(widgetId) {
 }
 
 function updateWidget(widgetId, widget) {
-  delete widget._id;
-  return WidgetModel
-    .update({_id: widgetId},{
-      $set : widget
-    })
+  console.log(widget);
+  return WidgetModel.update({_id: widgetId},{
+    $set: widget
+  });
 }
 
 function deleteWidget(widgetId) {

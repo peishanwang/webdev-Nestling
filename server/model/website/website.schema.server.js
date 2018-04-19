@@ -4,6 +4,7 @@ var pageSchema = require('../page/page.schema.server')
 var websiteSchema =mongoose.Schema({
   _user : {type : mongoose.Schema.ObjectId, ref: "User"},
   name: String,
+  username: String,
   description: String,
   pages: [pageSchema],
   dateCreated: {type: Date, default : Date.now}

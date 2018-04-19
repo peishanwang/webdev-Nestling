@@ -1,28 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand thick" [routerLink]="['.']"><b>Header Widget</b></a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
+      </ul>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+        <a [routerLink]="['/profile']">Profile</a>
+      </div>
+    </form>
+  </div>
+</nav>
 <div *ngIf="errorFlag"
      class="alert alert-danger">
   {{errorMsg}}
 </div>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid row">
-
-    <div class="navbar-text pull-left">
-      <a class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left" (click)="back()">
-          </span>
-      </a>
-    </div>
-    <div class="navbar-text pull-right">
-      <a class="cl-icon-padding cl-text-black">
-          <span class="glyphicon glyphicon-ok" (click)="updateWidget()">
-          </span>
-      </a>
-    </div>
-    <a class="navbar-brand cl-text-white cl-text-bold">
-      Widgets Edit
-    </a>
-  </div>
-</nav>
-
 <div class="container" *ngIf="curWidget">
   <div class="form-group">
     <label for="heading-name">Name</label>
@@ -37,6 +30,7 @@
     <input [(ngModel)]="curWidget.size" type="number" class="form-control" id="heading-size" placeholder="Size"
            step="1" min="1" max="6">
   </div>
-  <button class="btn btn-danger btn-block" (click)="deleteWidget()">Delete</button>
+  <button class="btn btn-outline-primary" (click)="updateWidget()">Save Changes</button>
+  <button class="btn btn-outline-danger" (click)="back()">Cancel</button>
 </div>
 

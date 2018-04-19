@@ -1,1 +1,302 @@
-/* You can add global styles to this file, and also import other style files */
+.red-border-class {
+  border: 1px solid red;
+}
+/*body {*/
+/*padding-top: 70px;*/
+/*padding-bottom: 70px;*/
+/*}*/
+
+.review-card {
+  max-width: 18rem;
+}
+
+.homepage-background {
+  background: url("assets/images/home-image5.jpg") no-repeat;
+  height: 550px;
+  position: relative;
+  background-size: cover;
+}
+
+.bg-color {
+  background-color: #483D8B;
+}
+.homepage-position{
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.homepage-middle {
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.body-padding {
+  padding: 40px;
+}
+
+.home-card-padding {
+  padding: 10px;
+}
+
+.card-padding {
+  padding: 25px;
+  margin: 20px;
+}
+.card-img-bottom {
+  color: #fff;
+  height: 15rem;
+  width: 15rem;
+  background: url("assets/images/home-image.jpg") center no-repeat;
+  background-size: cover;
+}
+
+.body-grey {
+  background-color: #ededef;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+
+input.form-control {
+  margin-bottom: 5px;
+}
+
+.cl-form-bottom-padding{
+  margin-bottom: 2em;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+.cl-container-padding {
+  padding: 5%;
+}
+
+.cl-blue-navbar{
+  background-color: #337ab7;
+}
+
+.cl-text-white{
+  color: #fff;
+}
+
+.cl-text-grey{
+  color: #222222;
+}
+
+.cl-text-black{
+  color: #000000;
+}
+
+.cl-text-bold{
+  font-weight: bold;
+}
+
+.cl-icon-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.cl-header-padding{
+  padding-left: 5%;
+}
+
+.cl-full-width{
+  width: 100%;
+}
+
+.cl-widget-list-item{
+  padding-bottom: 20px;
+}
+
+.cl-v-divider{
+  border-right: 1px solid #808080;
+  height: 100%;
+}
+
+.cl-widget-heading{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.cl-widget-paragraph{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.cl-height{
+  height: 100%;
+  min-height: 100%;
+}
+
+.cl-relative-position{
+  position: relative;
+}
+.cl-absolute-position{
+  position: absolute;
+}
+.cl-widget-list-icons{
+  top: 0px;
+  right: 0px;
+  z-index: 10;
+  background-color: white;
+}
+.cl-zero-right-padding{
+  padding-right: 0px;
+}
+
+.cl-list-item-borderless {
+  border-top: 0 none;
+  border-bottom: 0 none;
+  border-left: 0 none;
+  border-right: 0 none;
+}
+
+.cl-widget-images{
+  display: inline;
+  width: 85%;
+  z-index: 100;
+  position: relative;
+}
+.cl-8-top {
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.borders{
+  border-left:1px solid #ddd;
+  margin:-20px;
+  height:750px;
+  left:20px;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+.mid{
+  text-align: center;
+}
+
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+
+.login_frame {
+  width: 500px;
+  height: 475px;
+  padding: 13px;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px;
+  margin-top: -200px;
+
+  background-color: rgba(240, 255, 255, 0.5);
+
+  border-radius: 10px;
+  text-align: center;
+}
+
+.register_form {
+  background: #fff;
+  padding: 2em 4em 3em;
+  max-width: 400px;
+  margin: 10px auto 0;
+  box-shadow: 0 0 1em #222;
+  border-radius: 2px;
+}
+
+.register_form h2 {
+  margin:0 0 30px 0;
+  padding:10px;
+  text-align:center;
+  font-size:30px;
+  color: #666666;
+  border-bottom:solid 1px #e5e5e5;
+}
+
+.form-group {
+  margin-bottom: 1.3rem;
+}
+.small-input-bottom-margin {
+  margin-bottom: 0.9rem;
+}
+
+.large-input-bottom-margin {
+  margin-bottom: 1.7rem;
+}
+
+.text-center {
+  margin-top:10%;
+}
+
+.user-page-container {
+  padding-top: 30px;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.user-other-container {
+  margin-left: 200px;
+  margin-right: 200px;
+  background-color: white;
+  min-height: 90vh;
+
+}
+
+.product-page-container {
+  padding-top: 30px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.list-group-item {
+  margin: 5px;
+}
+
+.jumbotron {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: white;
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.background-white {
+  background-color: white;
+}
+
+.image-decorate {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid grey;
+  padding: 2px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.product-card {
+  background-color: white;
+}
+
+.container {
+  padding: 40px;
+}
+
+.website-list-header h2 {
+  display: inline;
+}
+
+.widget-padding {
+  padding: 5px;
+}

@@ -23,6 +23,13 @@ module.exports = function (app) {
   app.post('/api/logout', logout);
   app.post ('/api/register', register);
   app.post('/api/loggedIn', loggedIn);
+  app.get("/api/userLike/:username", findUsersByUsernameLike);
+  app.get("/api/allUser", findAllUsers);
+  app.get("/api/user/:userId/followers", findFollowersForUser);
+  app.get("/api/user/:userId/followings", findFollowingsForUser);
+  app.get("/api/follower/:followerId/followee/:followeeId", addFollow);
+  app.delete("/api/follower/:followerId/followee/:followeeId", deleteFollow);
+
   app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
@@ -159,7 +166,7 @@ module.exports = function (app) {
       })
 
   }
-  
+
   function createUser(req, res) {
     var newUser = req.body;
     userModel.createUser(newUser)
@@ -228,4 +235,125 @@ module.exports = function (app) {
           res.sendStatus(500).send(err);
         });
   }
-}
+
+  function findUsersByUsernameLike(req, res) {
+    var username = req.params["username"];
+    userModel.findUsersByUsernameLike(username)
+      .then(
+        function (users){
+          console.log("find users by username like");
+          res.json(users);
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
+  }
+
+  function findAllUsers(req, res){
+    userModel.findAllUsers().then(
+      function (users){
+        console.log("find all users");
+        res.json(users);
+      },
+      function (err) {
+        console.log(err);
+        res.status(500).send(err);
+      });
+  }
+
+  function findFollowersForUser(req, res){
+    var userId = req.params["userId"];
+    userModel
+      .findUserById(userId)
+      .then(function (targetUser) {
+          let followers = [];
+          let index = 0;
+          let promise = userModel.findUserById(targetUser.followers[index]);
+          for (var i = 1; i < targetUser.followers.length; i++) {
+            promise = promise.then(user => {
+              followers.push(user);
+              index++;
+              return userModel.findUserById(targetUser.followers[index]);
+            })
+          }
+          return promise.then( user => {
+              if (user) {
+                followers.push(user);
+              }
+              console.log("find followers for user: userId = " + userId);
+              console.log("total: " + followers.length + " followers");
+              res.status(200).json(followers);
+            }
+          )
+
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
+  }
+
+  function findFollowingsForUser(req, res){
+    var userId = req.params["userId"];
+    userModel
+      .findUserById(userId)
+      .then(function (targetUser) {
+          let followings = [];
+          let index = 0;
+          let promise = userModel.findUserById(targetUser.followings[index]);
+          for (var i = 1; i < targetUser.followings.length; i++) {
+            promise = promise.then(user => {
+              followings.push(user);
+              index++;
+              return userModel.findUserById(targetUser.followings[index]);
+            })
+          }
+          return promise.then(user => {
+              if (user != null) {
+                followings.push(user);
+              }
+              console.log("find followings for user: userId = " + userId);
+              console.log("total: " + followings.length + " followings");
+              res.status(200).json(followings);
+            }
+          )
+
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
+  }
+
+  function addFollow(req, res){
+    var followerId = req.params["followerId"];
+    var followeeId = req.params["followeeId"];
+    userModel
+      .addFollow(followerId, followeeId)
+      .then(function (status) {
+          console.log("add follow: followerId = " + followerId + " followeeId = " + followeeId);
+          //console.log(status);
+          res.status(200).send("add follow success!");
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
+  }
+
+  function deleteFollow(req, res){
+    var followerId = req.params["followerId"];
+    var followeeId = req.params["followeeId"];
+    userModel
+      .deleteFollow(followerId, followeeId)
+      .then(function (followee) {
+          console.log("delete follow: followerId = " + followerId + " followeeId = " + followeeId);
+          res.status(200).json("delete follow success!");
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).json(err);
+        });
+  }
+};

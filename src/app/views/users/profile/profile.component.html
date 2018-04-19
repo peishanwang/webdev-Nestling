@@ -1,48 +1,154 @@
-<nav class="navbar cl-blue-navbar navbar-fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand cl-text-white cl-text-bold" href="#">
-      Profile
-    </a>
-    <a routerLink="." class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
-      <span class="glyphicon glyphicon-ok" (click)="updateUser()"></span>
-    </a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand thick" [routerLink]="['/profile']"><b>My Profile</b></a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/websites']">Websites</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/users']">Influencers</a>
+        </li>
+      </ul>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right">
+        <a (click)="logout()">Log Out</a>
+      </div>
+    </form>
   </div>
 </nav>
 
+<div class="container-fluid row">
+  <div class="col-3 cl-container-padding">
+    <img class="img-responsive mx-4"
+         src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+         height="120" width="120">
+    <ul class="list-group cl-list-group-borderless">
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/profile']">
+          <b>Edit Profile</b>
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'followers']">
+          My Followers
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'followings']">
+          My Followings
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user/website']">
+          My Websites
+        </a>
+      </li>
+    </ul>
+  </div>
 
-<div class="container" *ngIf="user">
-  <form>
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name = "username">
-    </div>
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name = "email">
-    </div>
-    <div class="form-group">
-      <label for="first-name">First Name</label>
-      <input type="text" class="form-control" id="first-name" [(ngModel)]="user.firstName" name = "first-name">
-    </div>
-    <div class="form-group">
-      <label for="last-name">Last Name</label>
-      <input type="text" class="form-control" id="last-name" [(ngModel)]="user.lastName" name = "last-name">
-    </div>
-  </form>
+  <div class="col-9 col-sm-9 col-md-9 col-lg-9 cl-container-padding">
 
-  <a class="btn btn-primary btn-block"
-     routerLink="/user/website">Websites</a>
-  <a (click)="logout()"
-     class="btn btn-danger  btn-block"
-     [routerLink]="['/login']">Logout</a>
-  <a (click)="deleteUser()"
-     class="btn btn-danger btn-block">Delete User</a>
+    <div *ngIf="updateFlag" class="alert alert-success">
+      {{updateMsg}}
+    </div>
+
+    <div *ngIf="errorFlag" class="alert alert-danger">
+      {{errorMsg}}
+    </div>
+
+    <form>
+
+
+      <div class="form-group" *ngIf="user">
+        <label for="username">Username</label>
+        <input [(ngModel)]="user.username"
+               [ngClass]="{'red-border-class': errorFlag}"
+               id="username"
+               type="text"
+               class="form-control"
+               placeholder="Username"
+               [ngModelOptions]="{standalone: true}"/>
+        <span class="alert-class" *ngIf="errorFlag">{{alert}}</span>
+      </div>
+
+      <div class="form-group" *ngIf="user">
+        <label for="email">Email address</label>
+        <input [(ngModel)]="user.email"
+               id="email"
+               type="email"
+               class="form-control"
+               placeholder="Set your email"
+               [ngModelOptions]="{standalone: true}"/>
+      </div>
+
+      <div class="form-group" *ngIf="user">
+        <label for="first-name">First Name</label>
+        <input [(ngModel)]="user.firstName"
+               id="first-name"
+               type="text"
+               class="form-control"
+               placeholder="Set your FirstName"
+               [ngModelOptions]="{standalone: true}"/>
+      </div>
+
+      <div class="form-group" *ngIf="user">
+        <label for="last-name">Last Name</label>
+        <input [(ngModel)]="user.lastName"
+               id="last-name"
+               type="text"
+               class="form-control"
+               placeholder="Set your LastName"
+               [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <br/>
+
+      <button type="button" class="btn btn-outline-primary btn-block"
+              (click)="updateUser()">Save Changes</button>
+
+    </form>
+  </div>
 </div>
 
-<nav class="navbar cl-blue-navbar navbar-fixed-bottom">
-  <div class="container-fluid">
-    <a class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
-      <span class="glyphicon glyphicon-user" ></span>
-    </a>
+
+<!--
+<div class="container" *ngIf="user">
+  <div class="row product-card card-padding media">
+    <img class="img-responsive mr-4" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" height="215" width="215">
+    <div class="media-body">
+      <form>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name = "username">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name = "email">
+        </div>
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" class="form-control" id="first-name" [(ngModel)]="user.firstName" name = "first-name">
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" class="form-control" id="last-name" [(ngModel)]="user.lastName" name = "last-name">
+        </div>
+      </form>
+      <a class="btn btn-primary btn-block"
+         routerLink="/user/website">Websites</a>
+      <a (click)="logout()"
+         class="btn btn-danger  btn-block"
+         [routerLink]="['/login']">Logout</a>
+      <a (click)="deleteUser()"
+         class="btn btn-danger btn-block">Delete User</a>
+    </div>
   </div>
-</nav>
+
+
+
+</div>-->
+

@@ -1,0 +1,100 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand thick cl-text-white" [routerLink]="['.']"><b>Nestling</b></a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/websites']">Websites</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/users']">Influencers</a>
+        </li>
+      </ul>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name = "login">
+        <a [routerLink]="['/login']">Login</a>
+        <a [routerLink]="['/register']">Register</a>
+      </div>
+      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+        <a [routerLink]="['/profile']">Profile</a>
+      </div>
+    </form>
+  </div>
+</nav>
+
+
+<!--!!Material on the page!!-->
+
+<div class="homepage-background">
+  <div class="container homepage-middle">
+    <div class = "homepage-position">
+      <div class="text-center">
+        <h1><strong class="cl-text-grey">Know better, record better.</strong></h1>
+        <p class="lead cl-text-grey">Network with people like you.</p>
+        <div class="row">
+          <div class="input-group mb-3">
+            <input [(ngModel)]="searchText" placeholder="Find your interests..."
+                   type="text" class="form-control" [ngModelOptions]="{standalone: true}">
+            <button type="button" class="cl-text-white btn btn-light bg-color">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="body-grey body-padding">
+  <div class="card-columns">
+    <div class="card home-card-padding">
+      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title that wraps to a new line</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+    <div class="card body-padding">
+      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card home-card-padding">
+      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title that wraps to a new line</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+    <div class="card body-padding">
+      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title that wraps to a new line</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+    <div class="card body-padding">
+      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card body-padding">
+      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>

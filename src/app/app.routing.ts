@@ -1,5 +1,6 @@
 import {Routes, RouterModule} from '@angular/router';
 import {AuthGuard} from './services/auth-guard.service';
+import {HomeComponent} from "./views/home/home.component";
 import {LoginComponent} from './views/users/login/login.component';
 import {ProfileComponent} from './views/users/profile/profile.component';
 import {RegisterComponent} from './views/users/register/register.component';
@@ -18,13 +19,28 @@ import {WidgetYoutubeComponent} from "./views/widget/widget-edit/widget-youtube/
 import {WidgetHtmlComponent} from "./views/widget/widget-edit/widget-html/widget-html.component";
 import {WidgetTextComponent} from "./views/widget/widget-edit/widget-text/widget-text.component";
 import {FlickrImageSearchComponent} from "./views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component";
+import {ProfileOtherComponent} from "./views/users/profile-other/profile-other.component";
+import {WebsiteAllComponent} from "./views/website/website-all/website-all.component";
+import {UserAllComponent} from "./views/users/user-all/user-all.component";
+import {WebsiteOtherComponent} from "./views/website/website-other/website-other.component";
+import {UserFollowersComponent} from "./views/users/user-followers/user-followers.component";
+import {UserFollowingsComponent} from "./views/users/user-followings/user-followings.component";
+
 
 const appRoutes: Routes = [
   //path from root
-  {path: '', component : LoginComponent},
+  {path: '', component : HomeComponent, pathMatch: 'full'},
   {path: 'login', component : LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'username/:username', component: ProfileOtherComponent},
+  {path: 'websites', component: WebsiteAllComponent},
+  {path: 'users', component: UserAllComponent},
+  {path: 'username/:username', component: ProfileOtherComponent},
+  {path: 'username/:username/website/:wid', component: WebsiteOtherComponent},
+  {path: 'username/:username/website/:wid/page/:pid', component: WidgetListComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'user/followers', component: UserFollowersComponent, canActivate: [AuthGuard]},
+  {path: 'user/followings', component: UserFollowingsComponent, canActivate: [AuthGuard]},
   {path: 'user/website', component: WebsiteListComponent, canActivate: [AuthGuard]},
   {path: 'user/website/new', component: WebsiteNewComponent, canActivate: [AuthGuard]},
   {path: 'user/website/:wid', component: WebsiteEditComponent, canActivate: [AuthGuard]},

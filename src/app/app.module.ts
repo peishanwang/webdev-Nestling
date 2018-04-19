@@ -16,14 +16,14 @@ import { PageNewComponent } from './views/page/page-new/page-new.component';
 import { PageEditComponent } from './views/page/page-edit/page-edit.component';
 import { WidgetChooserComponent } from './views/widget/widget-chooser/widget-chooser.component';
 import { WidgetListComponent } from './views/widget/widget-list/widget-list.component';
-import { HttpModule } from "@angular/http";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { WidgetEditComponent } from './views/widget/widget-edit/widget-edit.component';
 import { WidgetHeaderComponent } from './views/widget/widget-edit/widget-header/widget-header.component';
 import { WidgetImageComponent } from './views/widget/widget-edit/widget-image/widget-image.component';
 import { WidgetYoutubeComponent } from './views/widget/widget-edit/widget-youtube/widget-youtube.component';
-import { GifService } from "./services/gif.service.client";
+import { GifService } from './services/gif.service.client';
 import { UserService } from './services/user.service.client';
 import { WebsiteService } from './services/website.service.client';
 import { PageService } from './services/page.service.client';
@@ -31,11 +31,19 @@ import { WidgetService } from './services/widget.service.client';
 import { WbdvSortableDirective } from './wbdv-sortable.directive';
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
-import {FlickrImageSearchComponent} from "./views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component";
-import {SharedService} from "./services/shared.service";
-import {FlickrService} from "./services/flickr.service.client";
-import {OrderByPipe} from "./views/widget/widget-list/order-by-pipe.pipe";
-import {AuthGuard} from "./services/auth-guard.service";
+import {FlickrImageSearchComponent} from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import {SharedService} from './services/shared.service';
+import {FlickrService} from './services/flickr.service.client';
+import {OrderByPipe} from './views/widget/widget-list/order-by-pipe.pipe';
+import {AuthGuard} from './services/auth-guard.service';
+import { HomeComponent } from './views/home/home.component';
+import { ProfileOtherComponent } from './views/users/profile-other/profile-other.component';
+import { WebsiteAllComponent } from './views/website/website-all/website-all.component';
+import { UserAllComponent } from './views/users/user-all/user-all.component';
+import { WebsiteOtherComponent } from './views/website/website-other/website-other.component';
+import { UserFollowersComponent } from './views/users/user-followers/user-followers.component';
+import { UserFollowingsComponent } from './views/users/user-followings/user-followings.component';
+import {TabsModule} from "ngx-bootstrap";
 
 
 
@@ -44,6 +52,7 @@ import {AuthGuard} from "./services/auth-guard.service";
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
@@ -63,7 +72,13 @@ import {AuthGuard} from "./services/auth-guard.service";
     WidgetHtmlComponent,
     WidgetTextComponent,
     FlickrImageSearchComponent,
-    OrderByPipe
+    OrderByPipe,
+    ProfileOtherComponent,
+    WebsiteAllComponent,
+    UserAllComponent,
+    WebsiteOtherComponent,
+    UserFollowersComponent,
+    UserFollowingsComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +86,8 @@ import {AuthGuard} from "./services/auth-guard.service";
     FormsModule,
     HttpModule,
     HttpClientModule,
-    QuillEditorModule
+    QuillEditorModule,
+    TabsModule.forRoot()
   ],
   providers: [GifService, UserService, WebsiteService, PageService, WidgetService, AuthGuard, SharedService, FlickrService],
   bootstrap: [AppComponent]

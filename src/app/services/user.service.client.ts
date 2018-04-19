@@ -32,6 +32,27 @@ export class UserService {
       );
   }
 
+  loggedInStay() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+      .map(
+        (res: Response) => {
+          const user = res.json();
+          if (user !== 0) {
+            this.sharedService.user = user; // setting user as global variable using shared service
+            return true;
+          } else {
+            return false;
+          }
+        }
+      );
+  }
+
+  static getNewUser() {
+    return {username: undefined, password: undefined,
+      photo: "https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"};
+  }
+
   // add a logout API to post a logout request to the server. The API should return an observable
   // for the component to register a callback and receive a server response.
   logout() {
@@ -42,6 +63,7 @@ export class UserService {
         return response; // not return a json object
       });
   }
+
 
   // posting a register request to the server.
   register (username, password) {
@@ -119,6 +141,53 @@ export class UserService {
     return this.http.delete(this.baseUrl + '/api/user/' + userId)
       .map((response: Response) => {
         return response.json();
+      });
+  }
+
+
+  findUsersByUsernameLike(username) {
+    return this.http.get(this.baseUrl + '/api/userLike/' + username)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  findAllUsers() {
+    return this.http.get(this.baseUrl + '/api/allUser')
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  findFollowersForUser(userId) {
+    return this.http.get(this.baseUrl + '/api/user/' + userId + '/followers')
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  findFollowingsForUser(userId) {
+    return this.http.get(this.baseUrl + '/api/user/' + userId + '/followings')
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  addFollow(followerId, followeeId) {
+    return this.http.get(this.baseUrl + '/api/follower/' + followerId + '/followee/' + followeeId)
+      .map(
+        (res: Response) => {
+          //console.log(res);
+          return res;
+        }
+      );
+  }
+
+  deleteFollow(followerId: String, followeeId: String) {
+    return this.http.delete(this.baseUrl + '/api/follower/' + followerId + '/followee/' + followeeId)
+      .map((response: Response) => {
+        //console.log(response)
+        return response;
       });
   }
 }

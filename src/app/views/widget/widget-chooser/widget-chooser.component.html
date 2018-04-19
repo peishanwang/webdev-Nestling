@@ -1,21 +1,21 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid row">
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand thick" [routerLink]="['.']" *ngIf="page"><b>{{page.title}}</b></a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
 
-    <div class="navbar-text pull-left">
-      <a routerLink=".."
-         class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left">
-          </span>
-      </a>
-    </div>
-
-    <a class="navbar-brand cl-text-white cl-text-bold">
-      Choose Widget
-    </a>
+      </ul>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+        <a [routerLink]="['/profile']">Profile</a>
+      </div>
+    </form>
   </div>
 </nav>
 
 <div class="container-fluid cl-container-padding">
+  <h2><b>Choose a widget type</b></h2>
   <ul class="list-group cl-list-group-borderless">
     <li class="list-group-item cl-list-item-borderless">
       <a routerLink="./header">Header</a>
@@ -34,15 +34,3 @@
     </li>
   </ul>
 </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid row">
-    <div class="pull-right navbar-text">
-
-      <a routerLink="/profile" class="cl-icon-padding">
-        <span class="glyphicon glyphicon-user"></span>
-      </a>
-
-    </div>
-  </div>
-</nav>

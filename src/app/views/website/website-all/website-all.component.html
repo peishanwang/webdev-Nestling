@@ -1,0 +1,54 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand thick cl-text-white" [routerLink]="['.']"><b>Nestling</b></a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/websites']">Websites</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/users']">Influencers</a>
+        </li>
+      </ul>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name = "login">
+        <a [routerLink]="['/login']">Login</a>
+        <a [routerLink]="['/register']">Register</a>
+      </div>
+      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+        <a [routerLink]="['/profile']">Profile</a>
+      </div>
+    </form>
+  </div>
+</nav>
+
+<div class="body-grey">
+  <div class="user-page-container">
+    <div class="input-group mb-3">
+      <input [(ngModel)]="searchText" type="text" class="form-control" [ngModelOptions]="{standalone: true}">
+      <button (click)="searchWebsites()" type="button" class="cl-text-white btn btn-light bg-color">Search</button>
+    </div>
+    <ul class="list-group cl-list-group-borderless">
+      <li *ngFor="let website of websites" class="list-group-item cl-list-item-borderless">
+        <div class="card border-info mb-3">
+          <div class="card-header">
+            <a routerLink="/username/{{website.username}}/website/{{website._id}}">
+              Name: {{website.name}}
+            </a>
+          </div>
+          <div class="card-body text-info">
+            <p class="card-text">{{website.description}}</p>
+          </div>
+          <div class="card-footer">
+            {{website.username}}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

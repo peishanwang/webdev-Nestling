@@ -1,48 +1,61 @@
-<div *ngIf="errorFlag"
-     class="alert alert-danger">
-  {{errorMsg}}
-</div>
-
-<nav class="navbar navbar-fixed-top cl-blue-navbar">
-  <div class="row">
-    <div class="col-xs-4 hidden-xs">
-      <div class="container-fluid">
-        <p class="navbar-text pull-left">
-          <a routerLink="/user/website" class="navbar-link cl-text-white">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-        </p>
-        <a class="cl-text-white navbar-brand cl-text-bold">
-          Websites
-        </a>
-        <a routerLink="/user/website/new" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
-          <span class="glyphicon glyphicon-plus"></span>
-        </a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand thick" [routerLink]="['/profile']"><b>My Profile</b></a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/product']">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/reviewers']">Reviewers</a>
+        </li>
+      </ul>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right">
+        <a (click)="logout()" href=".">Log Out</a>
       </div>
-    </div>
-    <div class="col-xs-8">
-      <div class="container-fluid">
-        <a class="cl-text-white navbar-brand cl-text-bold">
-          New Websites
-        </a>
-        <a class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
-          <span class="glyphicon glyphicon-ok" (click)="createWebsite()"></span>
-        </a>
-      </div>
-    </div>
+    </form>
   </div>
 </nav>
 
-<div class="contain-fluid">
-  <div class="col-xs-4 hidden-xs">
+<div class="container-fluid row">
+  <div class="col-3 cl-container-padding">
+    <img class="img-responsive mr-4" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+         height="150" width="150">
     <ul class="list-group cl-list-group-borderless">
-      <li *ngFor = "let website of websites" class="list-group-item cl-list-item-borderless">
-        <a routerLink="/user/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-        <a routerLink="/user/website/{{website._id}}/page">{{website.name}}</a>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/profile']">
+          Edit Profile
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'followers']">
+          My Followers
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'followings']">
+          My Followings
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user/website']">
+          My Websites
+        </a>
       </li>
     </ul>
   </div>
-  <div class="col-xs-8">
+
+  <div class="col-9 col-sm-9 col-md-9 col-lg-9 cl-container-padding">
+    <h2><b>Add new Websites</b></h2>
+    <div *ngIf="errorFlag"
+         class="alert alert-danger">
+      {{errorMsg}}
+    </div>
     <div class="form-group">
       <label for="website-name">Name</label>
       <input [(ngModel)] ="webName" type="text" class="form-control" id="website-name" placeholder="Name">
@@ -51,14 +64,7 @@
       <label for="website-description">Description</label>
       <textarea [(ngModel)]="webDes" id="website-description" class="form-control" rows="5" placeholder="Description"></textarea>
     </div>
-    <button routerLink="/user/website" class="btn btn-danger btn-block">Cancel</button>
+    <button (click)="createWebsite()" class="btn btn-outline-primary">Add</button>
+    <button routerLink="/user/website" class="btn btn-outline-danger">Cancel</button>
   </div>
 </div>
-
-<nav class="navbar navbar-fixed-bottom cl-blue-navbar">
-  <div class="container-fuild">
-    <a routerLink="/profile" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
-      <span class="glyphicon glyphicon-user"></span>
-    </a>
-  </div>
-</nav>

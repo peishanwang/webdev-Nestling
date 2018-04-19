@@ -49,4 +49,11 @@ export class WebsiteService {
       return response.json();
     });
   }
+
+  findAllWebsites() {
+    const url = this.baseUrl + '/api/allwebsite';
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
 }

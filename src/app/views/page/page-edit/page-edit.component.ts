@@ -32,14 +32,6 @@ export class PageEditComponent implements OnInit {
     }
   }
 
-  deletePage() {
-    //console.log(this.pageId);
-    this.pageService.deletePage(this.pageId).subscribe(
-      (data: any) => this.router
-        .navigate(['/user', '/website', this.websiteId, 'page'])
-    );
-  }
-
 
   ngOnInit() {
     this.activateRoute.params.subscribe((params: any) => {

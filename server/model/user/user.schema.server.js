@@ -11,7 +11,8 @@ var UserSchema = mongoose.Schema({
   firstName:String,
   lastName: String,
   email: String,
-  phone: String,
+  followers: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
+  followings: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
   websites:[websiteSchema],
   dateCreated: {type: Date, default : Date.now}
 }, {collection:'user'});
