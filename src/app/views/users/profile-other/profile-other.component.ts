@@ -19,7 +19,7 @@ export class ProfileOtherComponent implements OnInit {
   followers: [any];
   followings: [any];
   isFollowing: boolean;
-  isReviewer: boolean;
+  noUser: boolean;
 
   constructor(
     private sharedService: SharedService,
@@ -63,7 +63,12 @@ export class ProfileOtherComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginUser = this.sharedService.user;
+    this.userService.loggedInStay().subscribe(
+      (isLoggedIn) => {
+        this.noUser = !isLoggedIn;
+        this.loginUser = this.sharedService.user;
+      }
+    );
     this.activatedRoute.params.subscribe(
       (params: any) => {
         this.username = params['username'];

@@ -3,6 +3,7 @@ import {Website} from '../../../models/website.model.client';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from "../../../services/shared.service";
+import {UserService} from "../../../services/user.service.client";
 
 @Component({
   selector: 'app-website-new',
@@ -21,7 +22,8 @@ export class WebsiteNewComponent implements OnInit {
     private websiteService: WebsiteService,
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private sharedService: SharedService) {}
+    private sharedService: SharedService,
+    private userService: UserService) {}
 
   createWebsite() {
     if (WebsiteNewComponent.isEmpty(this.webName)) {
@@ -36,6 +38,16 @@ export class WebsiteNewComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.sharedService.user['_id'];
+  }
+
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+          this.router.navigate(['/']);
+        }
+      );
   }
 
   static isEmpty(input){
