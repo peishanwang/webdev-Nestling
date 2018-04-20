@@ -56,4 +56,11 @@ export class WebsiteService {
       return response.json();
     });
   }
+
+  findWebsitesByWebsiteName(websiteName) {
+    const url = this.baseUrl + '/api/websiteName/' + websiteName;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
 }

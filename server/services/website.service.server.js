@@ -5,6 +5,7 @@ module.exports = function(app){
   app.put("/api/website/:websiteId", updateWebsite);
   app.delete("/api/website/:websiteId", deleteWebsite);
   app.get("/api/allwebsite", findAllWebsites);
+  app.get("/api/websiteName/:websiteName", findWebsitesByWebsiteName);
   var websiteModel = require('../model/website/website.model.server');
   var userModel = require("../model/user/user.model.server");
   function createWebsite(req,res) {
@@ -79,6 +80,18 @@ module.exports = function(app){
   function findAllWebsites(req,res) {
     websiteModel
       .findAllWebsites()
+      .then(function (websites) {
+          res.json(websites);
+        },
+        function (err) {
+          res.sendStatus(500).send(err);
+        });
+  }
+
+  function findWebsitesByWebsiteName(req,res) {
+    var websiteName = req.params['websiteName'];
+    websiteModel
+      .findWebsitesByWebsiteName(websiteName)
       .then(function (websites) {
           res.json(websites);
         },

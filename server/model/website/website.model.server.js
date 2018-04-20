@@ -11,6 +11,7 @@ WebsiteModel.findWebsiteById = findWebsiteById;
 WebsiteModel.updateWebsite = updateWebsite;
 WebsiteModel.deleteWebsite = deleteWebsite;
 WebsiteModel.findAllWebsites = findAllWebsites;
+WebsiteModel.findWebsitesByWebsiteName = findWebsitesByWebsiteName;
 
 module.exports = WebsiteModel;
 
@@ -45,6 +46,10 @@ function findAllWebsites() {
   return WebsiteModel.find();
 }
 
+function findWebsitesByWebsiteName(websiteName) {
+  //console.log("model" + " productName")
+  return WebsiteModel.find({name: {'$regex': '.*' + websiteName + '.*'}});
+}
 
 
 

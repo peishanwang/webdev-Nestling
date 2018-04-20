@@ -31,7 +31,7 @@
   <div class="user-page-container">
     <div class="input-group mb-3">
       <input [(ngModel)]="searchText" type="text" class="form-control" [ngModelOptions]="{standalone: true}">
-      <button type="button" class="cl-text-white btn btn-light bg-color">Search</button>
+      <button (click)="searchWebsite()" type="button" class="cl-text-white btn btn-light bg-color">Search</button>
     </div>
     <ul class="list-group cl-list-group-borderless">
       <li *ngFor="let website of websites" class="list-group-item cl-list-item-borderless">

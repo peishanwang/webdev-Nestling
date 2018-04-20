@@ -38,9 +38,10 @@
         <p class="lead cl-text-grey">Network with people like you.</p>
         <div class="row">
           <div class="input-group mb-3">
-            <input [(ngModel)]="searchText" placeholder="Find your interests..."
+            <input [(ngModel)]="searchText"  placeholder="Find your interests..."
                    type="text" class="form-control" [ngModelOptions]="{standalone: true}">
-            <button type="button" class="cl-text-white btn btn-light bg-color">Search</button>
+            <button type="button" routerLink="websites" [queryParams]="{searchText: searchText}"
+                    class="cl-text-white btn btn-light bg-color">Search</button>
           </div>
         </div>
       </div>
